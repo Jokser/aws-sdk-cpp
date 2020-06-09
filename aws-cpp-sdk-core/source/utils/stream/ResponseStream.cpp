@@ -31,17 +31,17 @@ ResponseStream::ResponseStream(void) :
 }
 
 ResponseStream::ResponseStream(Aws::IOStream* underlyingStreamToManage) :
-    m_underlyingStream(underlyingStreamToManage)
+    m_underlyingStream(std::shared_ptr<Aws::IStream>(underlyingStreamToManage))
 {
 }
 
 ResponseStream::ResponseStream(Aws::IStream* underlyingStreamToManage) :
-    m_underlyingStream(underlyingStreamToManage)
+    m_underlyingStream(std::shared_ptr<Aws::IStream>(underlyingStreamToManage))
 {
 }
 
 ResponseStream::ResponseStream(const Aws::IOStreamFactory& factory) :
-    m_underlyingStream(factory())
+    m_underlyingStream(std::shared_ptr<Aws::IStream>(factory()))
 {
 }
 
